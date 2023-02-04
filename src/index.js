@@ -1,5 +1,5 @@
 import { ActivityIndicator, View } from "react-native";
-import { Game, StartGame } from "./screens";
+import { Game, GameOver, StartGame } from "./screens";
 
 import { Header } from "./components/index";
 import { styles } from "./styles";
@@ -15,16 +15,28 @@ const App = () => {
     'Karma-SemiBold': require('../assets/fonts/Karma-SemiBold.ttf'),
   });
   const [userNumber, setUserNumber] = useState(null);
-
+  const [guessRounds, setGuessRounds] = useState(0);
   const onHandlerStartGame = (selectedNumber) => {
     setUserNumber(selectedNumber);
   };
-  const Content = () => 
-    userNumber ? (
-      <Game selectedNumber={userNumber} /> 
-      ) : (
-      <StartGame onHandlerStartGame={onHandlerStartGame}/>
-      );
+   
+  const onHanleGameOver =(rounds) => {
+    setGuessRounds(rounds);
+  }
+
+  const onHandleRestartGame = ( )=> {
+    setUserNumber(null);
+    setGuessRounds(0);
+  };
+  const Content = () => {
+    if (userNumber && guessRounds <= 0){
+      return <Game selectedNumber={userNumber} onHanleGameOver={onHanleGameOver} /> ;
+    }
+    if (guessRounds > 0) {
+      return <GameOver onHandleRestartGame={onHandleRestartGame} rounds={guessRounds} selectedNumber={userNumber}/>;
+    }
+    return  <StartGame onHandlerStartGame={onHandlerStartGame}/>;
+  };
 
   if (!loaded) {
     return(

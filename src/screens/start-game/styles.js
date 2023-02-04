@@ -6,6 +6,9 @@ export const styles = StyleSheet.create({
         flex:1,
         alignItems:"center",
     },
+    containerScroll:{
+        flex:1,
+    },    
     title:{
         fontSize: 18,
         color: colors.text,
@@ -16,8 +19,8 @@ export const styles = StyleSheet.create({
     inputContainer:{
         justifyContent: "center",
         alignItems: "center",
-        marginHorizontal: 20,
         paddingVertical:20,
+        width: "75%"
     },
     label:{
         fontSize: 15,
@@ -28,6 +31,7 @@ export const styles = StyleSheet.create({
     },
     input:{
         width:'100%',
+        maxWidth: 40,
         borderBottomColor: colors.primary,
         borderBottomWidth: 1,
         minWidth:70,
